@@ -9,6 +9,8 @@
     <!--bootstrap-->
     <link href="https://cdn.bootcss.com/bootswatch/4.1.1/litera/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!--process_file-->
+    <script src="./process_web.js"></script>
 </head>
 <body>
     <!--导航栏-->
@@ -44,23 +46,33 @@
     <br><br>
 
     <div class="container">
+        <!--输入区-->
+        <div class="form-group">
+            <label class="col-form-label" for="key_words">Key Words</label>
+            <input type="text" class="form-control" placeholder="Key Words" id="key_words">
+            <br>
+            <label class="col-form-label" for="url">URL</label>
+            <input type="text" class="form-control" placeholder="url" id="url">
+            <br>
+            <button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">Y(^o^)Y</button>
+        </div>
         <!--显示区的表格-->
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Star Time</th>
+                <th scope="col">Record Time</th>
                 <th scope="col">Key Words</th>
                 <th scope="col">Webs</th>
                 <th scope="col">Functions</th>
             </tr>
             </thead>
-            <tbody>
-            <tr class="table-info">
-                <th scope="row">1974-01-01</th>
-                <td>For Test</td>
-                <td>http://github.com/SunSTong/clipBoard</td>
-                <td><button type="button" class="btn btn-danger btn-sm">Success</button></td>
-            </tr>
+            <tbody id="tbody">
+            <!--<tr class="table-info">-->
+                <!--<th scope="row">1974-01-01</th>-->
+                <!--<td>For Test</td>-->
+                <!--<td>http://github.com/SunSTong/clipBoard</td>-->
+                <!--<td><button type="button" class="btn btn-danger btn-sm">Open in Browse</button></td>-->
+            <!--</tr>-->
             </tbody>
         </table>
     </div>

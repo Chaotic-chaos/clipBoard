@@ -1,27 +1,22 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: tony
- * Date: 8/12/18
- * Time: 3:39 PM
+ * User: life0
+ * Date: 2018/9/15
+ * Time: 10:35
  */
-
 require_once "./config.php";
 $action = $_GET['action'];
-
-switch($action){
+switch ($action){
     case "query":
         query();
         break;
     case "insert":
         insert();
         break;
-    case "del_record":
-        delete();
 }
 
-function query()
-{
+function query(){
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PWD);
 //数据库是否连接成功，测试用
 //        if(!$con){
@@ -33,7 +28,7 @@ function query()
 //切换当前数据库
     mysqli_select_db($con, DB_NAME);
 //数据库语句定义
-    $sql = "SELECT * FROM clip_note";
+    $sql = "SELECT * FROM webs";
     $res = mysqli_query($con, $sql);
     $result_number_rows = mysqli_num_rows($res);
     if (!$result_number_rows) {
@@ -51,7 +46,8 @@ function query()
 }
 
 function insert(){
-    $content = $_POST['content'];
+    $key_words = $_POST['key_words'];
+    $url = $_POST['url'];
     $current_date = date("Y-m-d");
     $con = mysqli_connect(DB_HOST, DB_USER, DB_PWD);
 //数据库是否连接成功，测试用
@@ -64,7 +60,7 @@ function insert(){
 //切换当前数据库
     mysqli_select_db($con, DB_NAME);
 //数据库语句定义
-    $sql = "INSERT INTO clip_note VALUES(null, '".$current_date."','".$content."')";
+    $sql = "INSERT INTO webs VALUES(null, '".$current_date."','".$key_words."','".$url."')";
     mysqli_query($con, $sql);
     $res = mysqli_insert_id($con);
     if(!$res){
@@ -74,28 +70,4 @@ function insert(){
         echo "success";
     }
     mysqli_close($con);
-}
-
-function delete(){
-    $record_id = $_POST["record_id"];
-    $con = mysqli_connect(DB_HOST, DB_USER, DB_PWD);
-//数据库是否连接成功，测试用
-//        if(!$con){
-//            $data_status = "Database failed";
-//        }
-//        else{
-//            $data_status =  "Database connected";
-//        }
-//切换当前数据库
-    mysqli_select_db($con, DB_NAME);
-//数据库语句定义
-    $sql = "DELETE FROM clip_note WHERE record_id = ".$record_id;
-    mysqli_query($con, $sql);
-    $affected_rows = mysqli_affected_rows($con);
-    if($affected_rows){
-        echo "success";
-    }
-    else{
-        echo "failed";
-    }
 }
