@@ -22,6 +22,12 @@ function display(){
     })
 }
 
+function scrollToEnd(){//滚动到底部
+    var h = $(document).height()-$(window).height();
+    $(document).scrollTop(h);
+}
+
+
 
 //函数入口
 $(document).ready(
@@ -29,17 +35,31 @@ $(document).ready(
     display()
 )
 
-$("#submit").click(function(){
-    alert(2);
-    //插入新数据
+$("#submit").click(//插入新的
+    function() {
+        //插入新数据
         var key_words = $("#key_words").val();
         var url = $("#url").val();
         if(key_words == '' || url == ''){
             $("#submit").text("请输入内容");
             $("#submit").attr("class", "btn btn-warning btn-lg btn-block");
         }
-        $.post("./process_web.php?action=insert", {key_words: key_words, url: url}, function(res){
-            //post回调
-
-        })
-})
+        else {
+            $.post("./process_web.php?action=insert", {key_words: key_words, url: url}, function (res) {
+                //post回调
+                if(res == "success"){
+                    $("#submit").text("搞定了！");
+                    $("#submit").attr("class", "btn btn-success btn-lg btn-block");
+                    $("#key_words").val("");
+                    $("#url").val("");
+                    display();
+                    scrollToEnd();
+                }
+                else{
+                    $("#submit").text("服务器挂了，快去检查");
+                    $("#submit").attr("class", "btn btn-danger btn-lg btn-block");
+                }
+            })
+        }
+    }
+)
