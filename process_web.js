@@ -10,13 +10,24 @@ function display(){
             var result = eval(res);
             $("#tbody").empty();
             for (i = 0; i < result.length; i++) {
-                var table_row = '<tr class="table-info" id="row_' + result[i].record_id + '">\n' +
+                var table_row_0 = '<tr class="table-dafault" id="row_' + result[i].record_id + '">\n' +
                     '                <th scope="row">' + result[i].record_date + '</th>\n' +
                     '                <td>' + result[i].key_words + '</td>\n' +
                     '                <td>' + result[i].main_content + '</td>\n' +
                     '                <td><button type="button" class="btn btn-danger btn-sm">Open in Browse</button></td>\n' +
                     '            </tr>'
-                $("#tbody").append(table_row);
+                var table_row_1 = '<tr class="table-active" id="row_' + result[i].record_id + '">\n' +
+                    '                <th scope="row">' + result[i].record_date + '</th>\n' +
+                    '                <td>' + result[i].key_words + '</td>\n' +
+                    '                <td>' + result[i].main_content + '</td>\n' +
+                    '                <td><button type="button" class="btn btn-danger btn-sm">Open in Browse</button></td>\n' +
+                    '            </tr>'
+                if(i%2 == 0){
+                    $("#tbody").append(table_row_0);
+                }
+                else{
+                    $("#tbody").append(table_row_1);
+                }
             }
         }
     })
